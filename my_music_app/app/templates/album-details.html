@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!--Details Page-->
+<section id="detailsPage">
+    <div class="wrapper">
+ 
+        <div class="albumCover">
+            <!-- Album Image -->
+            <img src= "{{UpdateAlbumForm.image_url}}" alt="Cover Image">
+        </div>
+   
+        <div class="albumInfo">
+            
+            <div class="albumText">
+                <!-- Album Info -->
+                <h1>Name: {{UpdateAlbumForm.album_name}}</h1>
+                <h3>Artist: {{UpdateAlbumForm.artist}}</h3>
+                <h4>Genre: {{UpdateAlbumForm.genre}}</h4>
+                <h4>Price: ${{UpdateAlbumForm.price}}</h4>
+                <p>{{UpdateAlbumForm.description}}</p>
+            </div> 
+
+            <div class="actionBtn">
+                <!-- Album Buttons -->
+                <a href="{% url 'edit-album' UpdateAlbumForm.id %}" class="edit">Edit</a>
+                <a href="{% url 'delete-album' UpdateAlbumForm.id %}" class="remove">Delete</a>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
