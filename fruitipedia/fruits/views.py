@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Profile
-from .forms import ProfileForm  
+from .forms import ProfileForm, EditProfileForm
 
 
 def index(request):
@@ -30,11 +30,33 @@ def create_profile(request):
         
     return render(request, 'create-profile.html', {'form': form})
 
-def profile_details(request):
-    pass
+def details_profile(request):
+    profile = Profile.objects.all().first()
+    return render(request, 'details-profile.html', {"profile": profile})
 
-def profile_edit(request):
-    pass
+def edit_profile(request):
+    profile = Profile.objects.all().first()
+    
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST,instance=profile)
+        if form.is_valid():
+            
+            form.save()
+            
+            return redirect('details_profile')  
+        else:
+            print("Form is not valid")
+            print(form.errors)
+    else:
+       
+        form = EditProfileForm(instance=profile)
+        
+    return render(request, 'edit-profile.html', {'form': form,'profile': profile})
 
-def profile_delete(request):
-    pass
+def delete_profile(request):
+    profile = Profile.objects.all().first()
+    if request.method == 'POST':
+        profile.delete()
+        return redirect('index')
+
+    return render(request, 'delete-profile.html', {'profile': profile})
