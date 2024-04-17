@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <!-- delete recipe form -->
+      <section id="delete-page" class="auth">
+        <form id="delete" method="post" disabled="disabled">
+          {% csrf_token %}
+          <fieldset disabled="disabled" style="border:none">
+          <div class="container">
+            <h1>Delete Recipe</h1>
+            
+            {% for field in form %}
+            <div class="form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+              
+              {% if field.errors %}
+                <ul class="errorlist">
+                  {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+              {% if field.help_text %}
+                <div class="helptext">
+                  {{ field.help_text }}
+                </div>
+              {% endif %}
+            </div>
+            {{ field }}
+            {% endfor %}
+          </fieldset>
+          <!-- delete button -->
+          <input class="btn submit" type="submit" value="Delete Recipe" />
+        </div>
+      </form>
+
+      </section>
+
+      {% endblock content %}

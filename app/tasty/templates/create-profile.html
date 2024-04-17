@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+      <!-- create profile form -->
+      <section id="register-page" class="content auth">
+        <form id="register" method="post">
+          <div class="container">
+            {% for field in form %}
+            <div>
+
+                {% if field.errors %}
+                <ul class="errorlist">
+                    <li>{{ field.label }}
+                        <ul class="errorlist">
+                            {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {% csrf_token %}
+            <h1>Create Profile</h1>
+            <div>
+              <label for="id_nickname">Nickname:</label>
+
+              {{form.nickname}}
+            </div>
+
+            <div>
+              <label for="id_first_name">First Name:</label>
+
+              {{form.first_name}}
+            </div>
+
+            <div>
+              <label for="id_last_name">Last Name:</label>
+
+              {{form.last_name}}
+            </div>
+
+            <div>
+              <label for="id_chef">Chef: {{ form.chef }}</label>
+
+              
+            </div>
+            <!-- create button -->
+            <input class="btn submit" type="submit" value="Create Profile" />
+          </div>
+        </form>
+      </section>
+
+
+      {% endblock content %}
