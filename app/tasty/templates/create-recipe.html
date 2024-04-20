@@ -12,6 +12,7 @@
             {% csrf_token %}
             <h1 class="form-create-headline">Create Recipe</h1>
       
+            
             {% for field in form %}
             <div class="form-group">
               <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
